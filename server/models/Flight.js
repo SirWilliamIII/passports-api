@@ -15,9 +15,10 @@ const AirportArrival = mongoose.model('AirportArrival', {
 	},
 	airport: {
 		type:     String,
-		required: true,
-		trim:     true,
-		default:  null
+		trim:     true
+	},
+	isArrival: {
+		type: Boolean
 	},
 	date:    {
 		type:     Date,
