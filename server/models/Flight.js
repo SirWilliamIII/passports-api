@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const AirportArrival = mongoose.model('AirportArrival', {
+const Flight = mongoose.model('Flight', {
 	city:    {
 		type:      String,
 		minlength: 1,
@@ -27,4 +27,4 @@ const AirportArrival = mongoose.model('AirportArrival', {
 	}
 })
 
-module.exports = { AirportArrival }
+module.exports = { Flight }
