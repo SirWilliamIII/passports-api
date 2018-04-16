@@ -1,25 +1,25 @@
 const mongoose = require('mongoose')
 
 const AirportArrival = mongoose.model('AirportArrival', {
-	arrivalCity:    {
+	city:    {
 		type:      String,
 		minlength: 1,
 		required:  true,
 		trim:      true
 	},
-	arrivalCountry: {
+	country: {
 		type:      String,
 		minlength: 1,
 		required:  true,
 		trim:      true
 	},
-	airportName:    {
+	airport: {
 		type:     String,
 		required: true,
 		trim:     true,
 		default:  null
 	},
-	arrivalDate:    {
+	date:    {
 		type:     Date,
 		required: true,
 		default:  null
