@@ -14,8 +14,7 @@ const Flight = mongoose.model('Flight', {
 		trim:      true
 	},
 	airport: {
-		type:     String,
-		trim:     true
+		type:     String
 	},
 	isArrival: {
 		type: Boolean

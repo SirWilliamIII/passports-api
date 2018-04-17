@@ -7,10 +7,30 @@ const express      = require('express'),
 const { mongoose } = require('./db/mongoose')
 const { Flight } = require('./models/Flight')
 
-const app  = express(),
+const app = express(),
+      hbs = require('hbs'),
       port = process.env.PORT || 3333
 
+app.set('view engine', 'hbs')
+app.set('views', __dirname + '/views')
+
 app.use(bodyParser.json())
+
+app.get('/', (req, res) => {
+	res.render('home', {
+		pageTitle: 'Home, Bitch',
+		currentYear: new Date().getFullYear(),
+		message: 'Welcome to the Machine'
+	})
+})
+
+app.get('/about', (req, res) => {
+	res.render('about.hbs', {
+		pageTitle: 'About',
+		currentYear: new Date().getFullYear()
+	})
+})
+
 
 app.post('/api', (req, res) => {
 	const arrival = new Flight({
