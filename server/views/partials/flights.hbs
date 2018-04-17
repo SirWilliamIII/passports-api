@@ -1,0 +1,23 @@
+<div>
+	<form method="post" action="/api">
+		<div class="form-field">
+			<label for="city">City:</label>
+			<input name="city" type="text" placeholder="Enter City" value="" autofocus/>
+		</div>
+		<div class="form-field">
+			<label for="country">Country:</label>
+			<input name="country" type="text" placeholder="Enter Country" value=""/>
+		</div>
+		<div class="form-field">
+			<label for="date">Date (yyyy-mm-dd):</label>
+			<input name="date" type="text" placeholder="Enter date" value=""/>
+		</div>
+		<div class="form-actions">
+			<button class="btn" type="submit">Send</button>
+		</div>
+	</form>
+
+	<br><br> <b>FLIGHTS</b>
+	<p>{{flights}}</p>
+
+</div>

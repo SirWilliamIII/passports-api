@@ -1,4 +1,5 @@
 const express      = require('express'),
+      path         = require('path'),
       bodyParser   = require('body-parser'),
       _            = require('lodash'),
       { ObjectID } = require('mongodb')
@@ -7,30 +8,26 @@ const express      = require('express'),
 const { mongoose } = require('./db/mongoose')
 const { Flight } = require('./models/Flight')
 
-const app = express(),
-      hbs = require('hbs'),
+const app  = express(),
+      hbs  = require('hbs'),
       port = process.env.PORT || 3333
 
+hbs.registerPartials(__dirname + '/views/partials')
 app.set('view engine', 'hbs')
 app.set('views', __dirname + '/views')
+app.use(express.static(path.join(__dirname, 'public')))
+
 
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
-	res.render('home', {
-		pageTitle: 'Home, Bitch',
-		currentYear: new Date().getFullYear(),
-		message: 'Welcome to the Machine'
-	})
+	Flight.find()
+		.then(flights => {
+			res.send(flights)
+		}, e => {
+			res.status(400).send(e)
+		})
 })
-
-app.get('/about', (req, res) => {
-	res.render('about.hbs', {
-		pageTitle: 'About',
-		currentYear: new Date().getFullYear()
-	})
-})
-
 
 app.post('/api', (req, res) => {
 	const arrival = new Flight({
@@ -50,8 +47,8 @@ app.post('/api', (req, res) => {
 
 app.get('/api', (req, res) => {
 	Flight.find()
-		.then(flight => {
-			res.send({ flight })
+		.then(flights => {
+			res.send(flights)
 		}, e => {
 			res.status(400).send(e)
 		})
@@ -95,15 +92,15 @@ app.patch('/api/:id', (req, res) => {
 	const id = req.params.id
 	let body = _.pick(req.body, ['city', 'country', 'date', 'airport'])
 
-	Flight.findByIdAndUpdate(id, {$set: body}, {new: true})
+	Flight.findByIdAndUpdate(id, { $set: body }, { new: true })
 		.then(flight => {
 			if(!flight) {
 				return res.send(404).send()
 			}
-			res.send({flight})
+			res.send({ flight })
 
 		}).catch(e => {
-			res.status(400).send(e)
+		res.status(400).send(e)
 	})
 })
 
