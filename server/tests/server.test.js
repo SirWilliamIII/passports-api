@@ -2,22 +2,22 @@ const expect = require('expect')
 const request = require('supertest')
 
 const { app }            = require('./../server'),
-      { AirportArrival } = require('../models/AirportArrival')
+      { Flight } = require('../models/Flight')
 
 beforeEach(done => {
-	AirportArrival.remove({})
+	Flight.remove({})
 		.then(() => {
 			done()
 		})
 })
 
 
-describe('POST /arrivals', () => {
+describe('POST /api', () => {
 	it('should create a new arrival CITY and COUNTRY', done => {
-		var city = 'Somity'
+		const city = 'Test City'
 
 		request(app)
-			.post('/arrivals')
+			.post('/api')
 			.send({ city })
 			.expect(200)
 
@@ -25,9 +25,9 @@ describe('POST /arrivals', () => {
 				if(err) {
 					return done(err)
 				}
-				AirportArrival.find()
-					.then(arrivals => {
-						expect((arrivals.length).toBe(1))
+				Flight.find()
+					.then(flights => {
+						expect((flights.length).toBe(1))
 						done()
 					})
 					.catch(e => {

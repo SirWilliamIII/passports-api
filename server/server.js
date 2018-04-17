@@ -8,7 +8,7 @@ const { mongoose } = require('./db/mongoose')
 const { Flight } = require('./models/Flight')
 
 const app  = express(),
-      port = 3333
+      port = process.env.PORT || 3333
 
 app.use(bodyParser.json())
 

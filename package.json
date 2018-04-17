@@ -4,15 +4,19 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server/server.js",
+    "start": "node server/server.js",
     "test": "mocha server/**/*.test.js",
     "test-watch": "nodemon --exec 'npm test'"
+  },
+  "engines": {
+    "node": "8.11.0"
   },
   "author": "Will Carpenter <willcarpenteriii@gmail.com> (https://willcarpenter.site)",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
+    "lodash": "^4.17.5",
     "mongodb": "^3.0.6",
     "mongoose": "^5.0.15",
     "nodemon": "^1.17.3"
