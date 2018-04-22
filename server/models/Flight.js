@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-
 const Flight = mongoose.model('Flight', {
 	city:    {
 		type:      String,
